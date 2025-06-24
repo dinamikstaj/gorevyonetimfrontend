@@ -1,0 +1,776 @@
+/* app/globals.css (KOMPLE KOD) */
+
+:root {
+  /* Minimalist Renk Paleti */
+  --color-bg-primary: #1a1a2e; /* Koyu Ana Arka Plan */
+  --color-bg-secondary: #21213b; /* Kartlar ve Paneller İçin Daha Açık Koyu */
+  --color-text-primary: #e0e0e0; /* Açık Gri Metin */
+  --color-text-secondary: #a0a0b0; /* Nötr Gri Metin */
+  --color-accent-blue: #007bff; /* Temiz Mavi Vurgu */
+  --color-accent-green: #28a745; /* Canlı Yeşil (Başarı) */
+  --color-accent-red: #dc3545; /* Klasik Kırmızı (Hata/Sil) */
+  --color-border-subtle: rgba(255, 255, 255, 0.1); /* Çok Hafif Beyazımsı Kenarlık */
+  --color-border-active: var(--color-accent-blue);
+
+  /* Durum Renkleri */
+  --status-beklemede: #ffc107; /* Sarı */
+  --status-devam-ediyor: #17a2b8; /* Turkuaz Mavi */
+  --status-tamamlandı: #28a745; /* Yeşil */
+
+  /* Gölgelendirme */
+  --shadow-subtle: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --shadow-medium: 0 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Base Styles */
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif; /* Modern, temiz font */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  line-height: 1.6;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--color-text-primary);
+  margin-top: 0;
+  margin-bottom: 0.5em;
+  font-weight: 600; /* Daha az kalın */
+}
+
+/* Page Layout */
+.page-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding: 30px; /* Boşluğu artır */
+  max-width: 1500px; /* Daha geniş bir alan */
+  margin: 0 auto;
+}
+
+.header {
+  text-align: center;
+  padding: 30px 0;
+  margin-bottom: 30px; /* Boşluğu artır */
+}
+
+.main-title {
+  font-size: 3rem; /* Daha büyük başlık */
+  font-weight: 700;
+  color: var(--color-accent-blue);
+  margin-bottom: 15px;
+}
+
+.header-description {
+  font-size: 1.1rem;
+  color: var(--color-text-secondary);
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.main-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px; /* Boşluğu artır */
+  flex-wrap: wrap;
+  gap: 20px; /* Boşluğu artır */
+}
+
+.filter-buttons {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.filter-button {
+  background-color: var(--color-bg-secondary);
+  color: var(--color-text-primary);
+  border: 1px solid var(--color-border-subtle);
+  padding: 10px 18px; /* Daha fazla padding */
+  border-radius: 8px; /* Yumuşak köşeler */
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  font-size: 0.95rem;
+}
+
+.filter-button:hover {
+  background-color: var(--color-accent-blue);
+  border-color: var(--color-accent-blue);
+  color: #fff;
+}
+
+.filter-button.active {
+  background-color: var(--color-accent-blue);
+  border-color: var(--color-accent-blue);
+  font-weight: 600;
+  box-shadow: var(--shadow-subtle); /* Hafif gölge */
+}
+
+/* Yeni Layout: İki Sütunlu Yapı */
+.content-wrapper {
+  display: grid;
+  grid-template-columns: 380px 1fr; /* Sol 380px, Sağ kalan boşluk */
+  gap: 40px; /* Daha fazla boşluk */
+  flex-grow: 1;
+}
+
+.add-task-section,
+.task-list-section {
+  background-color: var(--color-bg-secondary);
+  padding: 30px; /* Daha fazla padding */
+  border-radius: 12px; /* Yumuşak köşeler */
+  box-shadow: var(--shadow-medium); /* Daha belirgin gölge */
+}
+
+.add-task-section {
+  display: flex;
+  flex-direction: column;
+  gap: 20px; /* Boşluğu artır */
+  height: fit-content;
+  position: sticky;
+  top: 30px; /* Üstten boşluk */
+}
+
+.section-title {
+  font-size: 2rem;
+  color: var(--color-accent-blue);
+  margin-bottom: 25px; /* Boşluğu artır */
+  text-align: center;
+}
+
+.input-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 18px; /* Boşluğu artır */
+}
+
+.input-grid input[type="text"],
+.input-grid textarea {
+  width: calc(100% - 24px); /* Padding'i hesaba kat */
+  padding: 12px; /* Daha fazla padding */
+  border: 1px solid var(--color-border-subtle);
+  border-radius: 8px; /* Yumuşak köşeler */
+  background-color: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.input-grid input[type="text"]:focus,
+.input-grid textarea:focus {
+  border-color: var(--color-accent-blue);
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25); /* Hafif focus halkası */
+}
+
+.input-grid textarea {
+  min-height: 100px; /* Minimum yüksekliği artır */
+}
+
+.add-task-button {
+  background-color: var(--color-accent-green);
+  color: #fff;
+  border: none;
+  padding: 15px 25px; /* Daha fazla padding */
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-weight: 600;
+  font-size: 1.1rem;
+  transition: background-color 0.2s, transform 0.1s;
+  width: 100%;
+  box-shadow: var(--shadow-subtle);
+}
+
+.add-task-button:hover:not(:disabled) {
+  background-color: #218838;
+  transform: translateY(-1px);
+}
+
+.add-task-button:disabled {
+  background-color: var(--color-border-subtle);
+  cursor: not-allowed;
+  opacity: 0.7;
+  box-shadow: none;
+}
+
+/* Notification Styles */
+.notification {
+  padding: 18px 25px; /* Daha fazla padding */
+  border-radius: 10px; /* Yumuşak köşeler */
+  margin-bottom: 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 500;
+  box-shadow: var(--shadow-medium);
+  gap: 20px;
+}
+
+.success-notification {
+  background-color: var(--color-accent-green);
+  color: #fff;
+}
+
+.error-message {
+  background-color: var(--color-accent-red);
+  color: #fff;
+}
+
+.notification-countdown {
+  margin-left: auto; /* Otomatik boşluk */
+  padding: 4px 10px;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: 6px;
+  font-size: 0.9rem;
+}
+
+.notification .btn-cancel {
+  background: none;
+  border: none; /* Kenarlığı kaldır */
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 5px;
+  border-radius: 4px;
+  transition: color 0.2s;
+}
+
+.notification .btn-cancel:hover {
+  color: #fff;
+}
+
+
+/* Task List - Listbox Style */
+.task-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px; /* Boşluğu artır */
+}
+
+.task-item.listbox-item {
+  background-color: var(--color-bg-primary); /* Daha koyu arka plan */
+  border: 1px solid var(--color-border-subtle);
+  border-radius: 10px; /* Yumuşak köşeler */
+  padding: 18px 25px; /* Daha fazla padding */
+  display: grid;
+  /* Yeni grid yapısı: Ana grup, meta grup, aksiyonlar */
+  grid-template-columns: 3fr 1.5fr 100px; /* Oranlar ayarlandı: Daha fazla alan ana bilgiye */
+  align-items: center;
+  gap: 20px; /* Boşluğu artır */
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  box-shadow: var(--shadow-subtle); /* Hafif gölge */
+}
+
+.task-item.listbox-item:hover {
+  background-color: var(--color-bg-secondary); /* Hover'da daha belirgin */
+  border-color: var(--color-accent-blue);
+  transform: translateY(-3px); /* Hafif yukarı kalkma */
+  box-shadow: var(--shadow-medium);
+}
+
+/* Yeni Grup Yapıları */
+.task-info-group {
+    display: flex;
+    flex-direction: column; /* Bilgiler alt alta sıralanacak */
+    gap: 8px; /* Her çift arasında boşluk */
+}
+
+.task-info-group.main-group {
+    /* Başlık, durum, tip gibi ana bilgilerin grubu */
+    display: flex;
+    flex-wrap: wrap; /* Küçük ekranlarda yan yana sığmayabilir */
+    align-items: flex-start;
+    gap: 15px 20px; /* Dikey ve yatay boşluk */
+}
+
+.task-info-group.meta-group {
+    /* Atanan, tarihler gibi meta bilgilerin grubu */
+}
+
+
+/* Etiket-Değer Çiftleri (label-value-pair) */
+.label-value-pair {
+    display: flex;
+    align-items: center;
+    gap: 8px; /* Etiket ve değer arasındaki boşluk */
+    font-size: 0.9rem; /* Genel metin boyutu */
+    color: var(--color-text-secondary);
+}
+
+.task-label {
+    font-weight: 600; /* Etiketler daha kalın */
+    color: var(--color-text-primary); /* Etiketler daha belirgin */
+    white-space: nowrap; /* Etiketlerin tek satırda kalmasını sağlar */
+    flex-shrink: 0; /* Küçülmesini engeller */
+}
+
+/* Mevcut stillerle çakışmaması için bazı düzenlemeler */
+.task-status-badge {
+  padding: 6px 12px;
+  border-radius: 6px; /* Daha az yuvarlak, daha modern */
+  font-size: 0.8rem; /* Biraz daha küçük font */
+  font-weight: 600; /* Daha kalın */
+  color: var(--color-bg-primary); /* Koyu arka plan üzerinde açık metin */
+  min-width: 100px; /* Sabit genişlik, okunabilirliği artırır */
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Hafif gölge */
+}
+
+/* Durum Bazlı Renkler */
+.status-beklemede { background-color: var(--status-beklemede); }
+.status-devam-ediyor { background-color: var(--status-devam-ediyor); }
+.status-tamamlandı { background-color: var(--status-tamamlandı); }
+
+.task-title-list {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex-grow: 1; /* Başlığın genişlemesine izin verir */
+}
+
+.task-type-list {
+  font-size: 0.9rem;
+  color: var(--color-accent-blue);
+  font-weight: 500;
+  padding: 4px 8px;
+  background-color: rgba(0, 123, 255, 0.1);
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+.task-assigned-info,
+.task-date-text {
+    font-size: 0.9rem; /* Değer metinlerinin boyutu */
+    color: var(--color-text-secondary);
+    white-space: nowrap;
+}
+
+/* İkonlar için düzenleme */
+.icon-small {
+    width: 18px; /* İkonlar biraz büyütüldü */
+    height: 18px;
+    flex-shrink: 0;
+}
+
+.task-actions {
+  display: flex;
+  gap: 8px; /* Boşluğu artır */
+  justify-content: flex-end;
+}
+
+.icon-button {
+  background: none;
+  border: none;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  padding: 8px; /* Daha fazla padding */
+  border-radius: 6px; /* Yumuşak köşeler */
+  transition: all 0.2s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-button:hover {
+  color: var(--color-accent-blue);
+  background-color: rgba(0, 123, 255, 0.1);
+}
+
+.icon-button.delete-icon:hover {
+  color: var(--color-accent-red);
+  background-color: rgba(220, 53, 69, 0.1);
+}
+
+/* Modal stilleri - Minimalist dokunuşlar */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.8); /* Daha koyu overlay */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background-color: var(--color-bg-secondary);
+  padding: 35px; /* Daha fazla padding */
+  border-radius: 12px; /* Yumuşak köşeler */
+  width: 90%;
+  max-width: 650px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5); /* Daha derin gölge */
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 25px; /* Boşluğu artır */
+}
+
+.modal-close-button {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: none;
+  border: none;
+  font-size: 2rem; /* Daha büyük çarpı */
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  padding: 5px;
+  border-radius: 5px;
+  transition: color 0.2s;
+}
+
+.modal-close-button:hover {
+  color: var(--color-accent-red);
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+}
+
+.modal-task-title {
+  font-size: 2rem;
+  color: var(--color-accent-blue);
+  margin: 0;
+  flex-grow: 1;
+}
+
+.modal-task-description {
+  color: var(--color-text-secondary);
+  line-height: 1.7; /* Daha rahat okuma */
+  margin-bottom: 25px;
+}
+
+.modal-details-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px; /* Boşluğu artır */
+    margin-bottom: 25px;
+}
+
+.modal-detail-item { /* Genel isimlendirme, label-value-pair'den miras alacak */
+    background-color: var(--color-bg-primary);
+    padding: 15px 20px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 1rem;
+    color: var(--color-text-secondary);
+}
+
+.modal-detail-item .task-label {
+    /* Modal içindeki etiketler */
+    color: var(--color-text-primary);
+    font-weight: 600;
+}
+
+.modal-detail-item .detail-value {
+    /* Modal içindeki değerler */
+    color: var(--color-text-secondary);
+    font-weight: 400;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 15px;
+  justify-content: flex-end;
+  margin-top: 25px;
+}
+
+.edit-button,
+.delete-button,
+.btn-secondary {
+  padding: 12px 25px; /* Daha fazla padding */
+  border-radius: 8px; /* Yumuşak köşeler */
+  cursor: pointer;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s, transform 0.1s;
+}
+
+.edit-button {
+  background-color: var(--color-accent-blue);
+  color: #fff;
+  border: none;
+  box-shadow: var(--shadow-subtle);
+}
+
+.edit-button:hover:not(:disabled) {
+  background-color: #0069d9;
+  transform: translateY(-1px);
+}
+
+.delete-button {
+  background-color: var(--color-accent-red);
+  color: #fff;
+  border: none;
+  box-shadow: var(--shadow-subtle);
+}
+
+.delete-button:hover:not(:disabled) {
+  background-color: #c82333;
+  transform: translateY(-1px);
+}
+
+.btn-secondary {
+  background: none;
+  border: 1px solid var(--color-border-subtle);
+  color: var(--color-text-secondary);
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background-color: var(--color-border-subtle);
+  color: var(--color-text-primary);
+  transform: translateY(-1px);
+}
+
+/* Input ve Select Stil Optimizasyonu */
+.task-status-select {
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--color-border-subtle);
+  background-color: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  font-size: 1rem;
+  background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23a0a0b0%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13%205.1L146.2%20202.7%2018.5%2074.5a17.6%2017.6%200%200%200-25.3%2023.7l137.5%20137.2c3.7%203.7%208.7%205.7%2013.7%205.7s10-2%2013.7-5.7l137.5-137.2c4.8-5.3%204.8-13.8-.1-19.1z%22%2F%3E%3C%2Fsvg%3E');
+  background-position: right 12px center; /* Ok ikonunun konumu */
+  background-size: 14px; /* Ok ikonu boyutu */
+  padding-right: 35px; /* Ok için boşluk */
+}
+
+.read-only-date-input {
+    background-color: var(--color-bg-primary);
+    color: var(--color-text-secondary);
+    border: 1px solid var(--color-border-subtle);
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: default;
+}
+
+
+/* Date Input Styles for Modal (Yeni Eklendi) */
+.label-value-pair.date-edit-pair {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Label ve input arasında boşluk */
+    flex-wrap: wrap; /* Küçük ekranlarda alt alta gelmesi için */
+}
+
+.label-value-pair.date-edit-pair .task-label {
+    flex-shrink: 0;
+}
+
+.date-input {
+    width: auto; /* Otomatik genişlik */
+    flex-grow: 1; /* Gerekirse genişle */
+    padding: 10px;
+    border: 1px solid var(--color-border-subtle);
+    border-radius: 8px;
+    background-color: var(--color-bg-primary);
+    color: var(--color-text-primary);
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    -webkit-appearance: none; /* iOS'ta varsayılan görünümü kaldır */
+    -moz-appearance: none; /* Firefox'ta varsayılan görünümü kaldır */
+    appearance: none; /* Varsayılan görünümü kaldır */
+    /* Takvim ikonu için boşluk bırak, tarayıcı tarafından otomatik eklenen ikonu override etme */
+    padding-right: 15px;
+}
+
+/* Chrome/Edge varsayılan takvim ikonunu gizlemek için (isteğe bağlı) */
+.date-input::-webkit-calendar-picker-indicator {
+    filter: invert(1); /* Karanlık temada görünür olması için */
+    cursor: pointer;
+    font-size: 1.2rem; /* İkon boyutu */
+}
+
+/* Firefox varsayılan takvim ikonunu gizlemek için (isteğe bağlı) */
+.date-input::-moz-calendar-picker-indicator {
+    filter: invert(1);
+    cursor: pointer;
+    font-size: 1.2rem;
+}
+
+.date-input:focus {
+  border-color: var(--color-accent-blue);
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+}
+
+.clear-date-button {
+    background-color: var(--color-accent-red);
+    color: #fff;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background-color 0.2s;
+    flex-shrink: 0; /* Küçülmesini engelle */
+}
+
+.clear-date-button:hover:not(:disabled) {
+    background-color: #c82333;
+}
+
+.clear-date-button:disabled {
+    background-color: var(--color-border-subtle);
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+
+/* Footer */
+.footer {
+  text-align: center;
+  padding: 30px 0;
+  border-top: 1px solid var(--color-border-subtle);
+  margin-top: 40px; /* Daha fazla boşluk */
+  color: var(--color-text-secondary);
+  font-size: 0.9rem;
+}
+
+/* Responsive Düzenlemeler */
+@media (max-width: 992px) { /* Tablet boyutları için */
+  .content-wrapper {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .add-task-section {
+    position: static;
+    top: auto;
+  }
+
+  /* Task List - Tablet düzenlemesi */
+  .task-item.listbox-item {
+    grid-template-columns: 1fr; /* Tek sütuna düşür */
+    gap: 15px;
+  }
+
+  .task-info-group.main-group {
+    flex-direction: column; /* Mobil için alt alta */
+    gap: 10px;
+    align-items: flex-start; /* Başlangıca hizala */
+  }
+
+  .task-info-group.meta-group {
+    flex-direction: column; /* Meta bilgiler alt alta */
+    align-items: flex-start;
+  }
+
+  .task-actions {
+      justify-content: flex-start; /* Aksiyon butonlarını sola hizala */
+  }
+
+}
+
+@media (max-width: 768px) { /* Daha küçük tablet ve mobil boyutları */
+  .page-container {
+    padding: 20px;
+  }
+
+  .main-title {
+    font-size: 2.5rem;
+  }
+
+  .header-description {
+    font-size: 0.95rem;
+  }
+
+  .main-nav {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+
+  .filter-buttons {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .filter-button {
+    flex-grow: 1; /* Butonların genişlemesini sağlar */
+  }
+
+  .add-task-section,
+  .task-list-section {
+    padding: 20px;
+  }
+
+  .section-title {
+    font-size: 1.7rem;
+  }
+
+  .task-item.listbox-item {
+    padding: 15px 20px;
+  }
+
+  .task-status-badge {
+    min-width: unset; /* Esnek genişlik */
+  }
+
+  .task-title-list {
+    font-size: 1.1rem;
+  }
+  .task-type-list, .task-assigned-info {
+      font-size: 0.8rem;
+  }
+
+  .modal-content {
+    padding: 25px;
+  }
+
+  .modal-task-title {
+    font-size: 1.5rem;
+  }
+
+  .modal-details-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .label-value-pair.date-edit-pair {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .date-input {
+      width: 100%; /* Mobil'de tam genişlik */
+  }
+}
+
+@media (max-width: 480px) { /* Küçük mobil cihazlar */
+  .main-title {
+    font-size: 2rem;
+  }
+
+  .filter-button, .add-task-button {
+    font-size: 0.9rem;
+    padding: 10px 15px;
+  }
+
+  .input-grid input, .input-grid textarea {
+    font-size: 0.9rem;
+  }
+}
